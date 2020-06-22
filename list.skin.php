@@ -1,11 +1,13 @@
 <?php
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 $thisMode = '';
-// 'bbs', 'card', 'download', 'gallery 중 택1, 설정안하면 bbs모드로 실행됨.
+// 'bbs', 'card', 'download', 'gallery', 'qna' 중 택1, 설정안하면 bbs모드로 실행됨.
 // 'bbs' : 일반게시판
+// 'qna' : 질문답변게시판 (목록에서 내용보기 사용해야함)
 // 'card' : 카드타입 디자인, 위쪽 썸네일, 아래쪽 정보 텍스트, 목록에서 첨부파일 1번 다운로드 지원(게시판 다운로드 권한 설정, 포인트 설정 적용됨). !!단, 게시판 설정에서 '목록에서 파일 사용' 체크 해야함.
 // 'download' : 카드타입 디자인에서 썸네일 제거됨, 목록에서 첨부파일 1번 다운로드 지원(게시판 다운로드 권한 설정, 포인트 설정 적용됨). !!단, 게시판 설정에서 '목록에서 파일 사용' 체크 해야함.
 // 'gallery' : 핀터레스트 스타일 그리드. 썸네일에 mouseover(hover) 상태에서 정보 레이어(div) 오버레이됨. 모바일에서는 카드형 레이아웃 형태로 썸네일 CROP하지 않고 수직 비율 유지되어 나타남(css background-size:cover 형태 아님)
+// 'photo' : 위의 갤러리 형태에서 그리드를 일정한 크기로 고정시켜 보임
 
 include_once($board_skin_path.'/dings.lib.php');
 $searchOptions = dings_selected_options($sfl);
@@ -89,9 +91,9 @@ add_stylesheet('<link href="https://fonts.googleapis.com/css2?family=Montserrat:
 
             <div class="board-body">
 
-                <?php if ($gallery) { ?>
+                <?php if ($gallery || $photo) { ?>
                 <!-- 갤러리 스킨 -->
-                <ul class="board-card-list gallery js-grid">
+                <ul class="board-card-list gallery js-grid<?php if ($photo) echo ' gallery-mode-photo' ?>">
                     <?php if (count($list) < 1) { ?>
                     <li class="nothing">
                         <div class="board-card-inner">
@@ -100,12 +102,14 @@ add_stylesheet('<link href="https://fonts.googleapis.com/css2?family=Montserrat:
                     </li>
                     <?php } else { ?>
                     <?php for ($i=0; $i<count($list); $i++) { ?>
-                    <li class="js-grid-item">
+                    <li class="js-grid-gallery">
                         <div class="board-card-inner">
                             <div class="board-card-thumb">
                                 <?php
                                 include_once(G5_LIB_PATH.'/thumbnail.lib.php');
-                                $thumb = get_list_thumbnail($bo_table, $list[$i]['wr_id'], '395', '0');
+                                $galleryHeight = $gallery === true ? '0' : '263';
+                                $galleryCrop = $gallery === true ? false : true;
+                                $thumb = get_list_thumbnail($bo_table, $list[$i]['wr_id'], '395', $galleryHeight, false, $galleryCrop);
                                 if ($thumb['src'] && (!isset($list[$i]['icon_secret']) || empty($list[$i]['icon_secret']))) {
                                 ?>
                                 <a href="<?php echo $list[$i]['href'] ?>" style="background-image:url('<?php echo $thumb['src'] ?>');">
@@ -184,11 +188,90 @@ add_stylesheet('<link href="https://fonts.googleapis.com/css2?family=Montserrat:
                 <script>
                     $(window).load(function(){
                         $('.js-grid').masonry({
-                            itemSelector: '.js-grid-item'
+                            itemSelector: '.js-grid-gallery'
                         });
                     });
                 </script>
                 <!--/ 갤러리 스킨 -->
+                <?php } ?>
+
+                <?php if ($qna) { ?>
+                <!-- QnA 스킨 -->
+                <ul class="board-qna-list<?php if ($is_checkbox) echo ' is-checkbox' ?>">
+                    <?php if (count($list) < 1) { ?>
+                    <li class="nothing">
+                        <div class="qna-list-item">
+                            <div class="qna-question">
+                                <div class="qna-question-inner">
+                                    시험접수 방법 및 교육접수는 어떻게 하나요?
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <?php } else { ?>
+                    <?php for ($i=0; $i<count($list); $i++) { ?>
+                    <li class="qna-list">
+                        <div class="qna-list-item">
+                            <div class="qna-question js-toggle-answer">
+                                <div class="qna-question-inner">
+                                    <div class="qan-title">
+                                        <?php echo $list[$i]['subject'] ?>
+                                    </div>
+                                    <div class="qna-flag">
+                                        <i class="fa fa-chevron-up close"></i>
+                                        <i class="fa fa-chevron-down open"></i>
+                                    </div>
+                                    <?php if ($is_checkbox) { ?>
+                                    <div class="qna-admin">
+                                        <a href="<?php echo $list[$i]['href'] ?>">자세히</a>
+                                    </div>
+                                    <?php } ?>
+                                </div>
+
+                                <?php if ($is_checkbox) { ?>
+                                <div class="board-qna-check">
+                                    <input type="checkbox" name="chk_wr_id[]" value="<?php echo $list[$i]['wr_id'] ?>" id="chk_wr_id_<?php echo $i ?>" class="hidden-checkbox js-checkbox">
+                                    <label class="checkbox-fake" for="chk_wr_id_<?php echo $i ?>">
+                                        <div class="checkbox-fake-icon"></div>
+                                    </label>
+                                </div>
+                                <?php } ?>
+
+                            </div>
+                            <div class="qna-answer">
+                                <div class="qna-answer-inner">
+                                    <div class="qna-content">
+                                        <div class="qna-content-scrollable">
+                                            <div class="qna-scrollable-content">
+                                                <?php echo nl2br($list[$i]['wr_content']) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <?php } ?>
+                    <?php } ?>
+                </ul>
+                <script>
+                    $('.js-toggle-answer').click(function(e){
+                        var element = $('a');
+                        if (!element.is(e.target) && element.has(e.target).length < 1) {
+                            $(this).closest('li').toggleClass('opened');
+                        }                            
+                    });
+                    var maxHeight = 332;
+                    $('.board-qna-list').find('li').each(function(){
+                        var $this = $(this);
+                        var outer = $this.find('.qna-answer-inner');
+                        var inner = $this.find('.qna-scrollable-content');
+                        console.log(inner.height());
+                        if (maxHeight < inner.height()) outer.outerHeight(maxHeight);
+                    });
+
+                </script>
+                <!-- / QnA 스킨 -->
                 <?php } ?>
 
                 <?php if ($card) { ?>
