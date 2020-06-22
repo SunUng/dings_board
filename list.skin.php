@@ -203,7 +203,7 @@ add_stylesheet('<link href="https://fonts.googleapis.com/css2?family=Montserrat:
                         <div class="qna-list-item">
                             <div class="qna-question">
                                 <div class="qna-question-inner">
-                                    시험접수 방법 및 교육접수는 어떻게 하나요?
+                                    등록된 질답이 없습니다.
                                 </div>
                             </div>
                         </div>
