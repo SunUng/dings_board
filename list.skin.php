@@ -1,9 +1,9 @@
 <?php
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
-$thisMode = '';
-// 'bbs', 'card', 'download', 'gallery', 'qna' 중 택1, 설정안하면 bbs모드로 실행됨.
+$thisMode = $thisMode ? $thisMode : '';
+// 'bbs', 'card', 'download', 'gallery', 'faq' 중 택1, 설정안하면 bbs모드로 실행됨.
 // 'bbs' : 일반게시판
-// 'qna' : 질문답변게시판 (목록에서 내용보기 사용해야함)
+// 'faq' : 질문답변게시판 (목록에서 내용보기 사용해야함)
 // 'card' : 카드타입 디자인, 위쪽 썸네일, 아래쪽 정보 텍스트, 목록에서 첨부파일 1번 다운로드 지원(게시판 다운로드 권한 설정, 포인트 설정 적용됨). !!단, 게시판 설정에서 '목록에서 파일 사용' 체크 해야함.
 // 'download' : 카드타입 디자인에서 썸네일 제거됨, 목록에서 첨부파일 1번 다운로드 지원(게시판 다운로드 권한 설정, 포인트 설정 적용됨). !!단, 게시판 설정에서 '목록에서 파일 사용' 체크 해야함.
 // 'gallery' : 핀터레스트 스타일 그리드. 썸네일에 mouseover(hover) 상태에서 정보 레이어(div) 오버레이됨. 모바일에서는 카드형 레이아웃 형태로 썸네일 CROP하지 않고 수직 비율 유지되어 나타남(css background-size:cover 형태 아님)
@@ -195,8 +195,8 @@ add_stylesheet('<link href="https://fonts.googleapis.com/css2?family=Montserrat:
                 <!--/ 갤러리 스킨 -->
                 <?php } ?>
 
-                <?php if ($qna) { ?>
-                <!-- QnA 스킨 -->
+                <?php if ($faq) { ?>
+                <!-- FAQ 스킨 -->
                 <ul class="board-qna-list<?php if ($is_checkbox) echo ' is-checkbox' ?>">
                     <?php if (count($list) < 1) { ?>
                     <li class="nothing">
@@ -271,7 +271,7 @@ add_stylesheet('<link href="https://fonts.googleapis.com/css2?family=Montserrat:
                     });
 
                 </script>
-                <!-- / QnA 스킨 -->
+                <!-- / FAQ 스킨 -->
                 <?php } ?>
 
                 <?php if ($card) { ?>

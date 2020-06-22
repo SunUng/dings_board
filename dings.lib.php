@@ -35,7 +35,7 @@ if ($thisMode === 'card') $card = true;
 if ($thisMode === 'download') $download = true;
 if ($thisMode === 'gallery') $gallery = true;
 if ($thisMode === 'photo') $photo = true;
-if ($thisMode === 'qna') $qna = true;
+if ($thisMode === 'faq') $faq = true;
 
 
 if ($thisMode === 'bbs' || $thisMode === '') {
