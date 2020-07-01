@@ -222,7 +222,7 @@ if ($is_notice || $is_html || $is_secret || $is_mail) {
                         내용
                     </label>
                     <div class="write-form-content">
-
+                        <?php echo $option_hidden ?>
                         <?php if ($option) { ?>
                             <ul class="list-write-option">
                                 <?php echo $option ?>
