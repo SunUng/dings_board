@@ -731,3 +731,6 @@ a.btn-go-list { background: #0a0a0a; color: #fff; border-color: #0a0a0a; }
   .qna-answer-inner { padding: 20px; }
   .qna-content { padding-left: 30px; }
   .qna-scrollable-content { font-size: 14px; } }
+.board-view-thumbs { text-align: center; }
+.board-view-thumbs::after { content: ''; display: table; clear: both; }
+.board-view-thumbs .borad-view-thumbs-item { float: left; display: block; width: 100%; text-align: center; }

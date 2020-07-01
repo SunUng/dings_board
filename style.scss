@@ -2330,3 +2330,21 @@ $color-form-gray : #f4f4f4;
 @media all and (max-width: 640px) {}
 @media all and (max-width: 512px) {}
 @media all and (max-width: 480px) {}
+
+// 이미지 파일 출력 부분 수정
+.board-view-thumbs {
+  text-align: center;
+
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  .borad-view-thumbs-item {
+    float: left;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}

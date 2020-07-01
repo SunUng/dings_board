@@ -66,7 +66,9 @@ add_stylesheet('<link href="https://fonts.googleapis.com/css2?family=Montserrat:
             ?>
             <div class="board-view-thumbs">
             <?php for ($i=0; $i<=count($view['file']); $i++) { ?>
-            <?php echo get_file_thumbnail($view['file'][$i]) ?>
+                <div class="borad-view-thumbs-item">
+                    <?php echo get_file_thumbnail($view['file'][$i]) ?>
+                </div>
             <?php } ?>
             </div>
             <?php } ?>
