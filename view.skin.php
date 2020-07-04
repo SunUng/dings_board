@@ -347,15 +347,15 @@ add_stylesheet('<link href="https://fonts.googleapis.com/css2?family=Montserrat:
 </article>
 
 <script>
-var wrapper = $('#boardView');
-if ($.cookie('comments_toggle')) wrapper.addClass('opened');
+var commentWrapper = $('#boardView');
+if ($.cookie('comments_toggle')) commentWrapper.addClass('opened');
 $('.comments-head').click(function(){
-    var isOpened = wrapper.hasClass('opened');
+    var isOpened = commentWrapper.hasClass('opened');
     if (isOpened) { //닫기
-        wrapper.removeClass('opened');
+        commentWrapper.removeClass('opened');
         $.removeCookie('comments_toggle');
     } else { //열기
-        wrapper.addClass('opened');
+        commentWrapper.addClass('opened');
         $.cookie('comments_toggle', 'opened');
     }
 });
