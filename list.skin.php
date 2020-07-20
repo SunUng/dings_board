@@ -165,7 +165,7 @@ add_stylesheet('<link href="https://fonts.googleapis.com/css2?family=Montserrat:
                                         </div>
                                         <div class="board-card-info ellipsis">
                                             <div class="board-card-info-date">
-                                                <?php echo date("Y.d.m", strtotime($list[$i]['datetime'])); ?>
+                                                <?php echo date("Y.m.d", strtotime($list[$i]['datetime'])); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -352,7 +352,7 @@ add_stylesheet('<link href="https://fonts.googleapis.com/css2?family=Montserrat:
                                 </div>
                                 <div class="board-card-info ellipsis">
                                     <div class="board-card-info-date">
-                                        <?php echo date("Y.d.m", strtotime($list[$i]['datetime'])); ?>
+                                        <?php echo date("Y.m.d", strtotime($list[$i]['datetime'])); ?>
                                     </div>
                                     <?php
                                     if($board['bo_use_list_file']){
@@ -441,7 +441,7 @@ add_stylesheet('<link href="https://fonts.googleapis.com/css2?family=Montserrat:
                                 </div>
                                 <div class="board-card-info ellipsis">
                                     <div class="board-card-info-date">
-                                        <?php echo date("Y.d.m", strtotime($list[$i]['datetime'])); ?>
+                                        <?php echo date("Y.m.d", strtotime($list[$i]['datetime'])); ?>
                                     </div>
                                     <?php
                                     if($board['bo_use_list_file']){
@@ -534,7 +534,7 @@ add_stylesheet('<link href="https://fonts.googleapis.com/css2?family=Montserrat:
                             <td class="col5">H <?php echo $list[$i]['wr_hit'] ?></td>
                             <?php if ($is_good) { ?><td class="col6">G <?php echo $list[$i]['wr_good'] ?></td><?php } ?>
                             <?php if ($is_nogood) { ?><td class="col7">B <?php echo $list[$i]['wr_nogood'] ?></td><?php } ?>
-                            <td class="col8"><?php echo date("Y.d.m", strtotime($list[$i]['datetime'])); ?></td>
+                            <td class="col8"><?php echo date("Y.m.d", strtotime($list[$i]['datetime'])); ?></td>
                         </tr>
                         <?php } ?>
                     </tbody>
