@@ -608,8 +608,33 @@ $color-form-gray : #f4f4f4;
   .write-form-item {
     padding:20px 0;
   }
-
-  
+  .write-file-remover {
+    position:static;
+    transform:none;
+    display: block;
+    width:100%;
+    margin-top:10px;
+    .checkbox-fake,
+    .radio-fake {
+      width:100%;
+    }
+  }
+  .write-form-file {
+    .write-file-input {
+      height:30px;
+    }
+  }
+  .write-file-remover {
+    .checkbox-fake-icon, .radio-fake-icon {
+      margin-right:10px;
+    }
+    .checkbox-fake-text {
+      float:none;
+    }
+  }
+  #smart_editor2 {
+    min-width: 100% !important;
+  }
 } 
 @media all and (max-width: 640px) {}
 @media all and (max-width: 512px) {

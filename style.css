@@ -668,7 +668,13 @@ a.btn-go-list { background: #0a0a0a; color: #fff; border-color: #0a0a0a; }
   .board-view-sns #bo_v_sns li img { margin: 0; }
   .board-view-sns #bo_v_sns li span { display: none; } }
 @media all and (max-width: 800px) { .subpage-content { padding-left: 0; }
-  .write-form-item { padding: 20px 0; } }
+  .write-form-item { padding: 20px 0; }
+  .write-file-remover { position: static; -webkit-transform: none; transform: none; display: block; width: 100%; margin-top: 10px; }
+  .write-file-remover .checkbox-fake, .write-file-remover .radio-fake { width: 100%; }
+  .write-form-file .write-file-input { height: 30px; }
+  .write-file-remover .checkbox-fake-icon, .write-file-remover .radio-fake-icon { margin-right: 10px; }
+  .write-file-remover .checkbox-fake-text { float: none; }
+  #smart_editor2 { min-width: 100% !important; } }
 @media all and (max-width: 512px) { .write-form-label, .write-form-content { width: 100%; }
   .write-form-label { position: static; margin-bottom: 10px; }
   .write-form-content { padding: 0; }
